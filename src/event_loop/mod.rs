@@ -1,5 +1,5 @@
 mod poll;
-mod wasi_sock;
+//mod wasi_sock;
 
 use crate::event_loop::poll::{Eventtype, Subscription};
 use crate::{quickjs_sys as qjs, Context, JsValue};
@@ -8,9 +8,9 @@ use std::cell::RefCell;
 use std::collections::{HashMap, LinkedList};
 use std::io;
 use std::mem::ManuallyDrop;
-use std::net::{SocketAddr, SocketAddrV4};
+//use std::net::{SocketAddr, SocketAddrV4};
 use std::ops::Add;
-
+/*
 pub use wasi_sock::nslookup;
 
 pub(crate) enum NetPollEvent {
@@ -125,12 +125,13 @@ impl AsyncTcpConn {
         self.0.get_peer()
     }
 }
+*/
 
 pub enum PollResult {
     Timeout,
-    Accept(AsyncTcpConn),
+    //Accept(AsyncTcpConn),
     Read(Vec<u8>),
-    Connect(AsyncTcpConn),
+    //Connect(AsyncTcpConn),
     Error(io::Error),
 }
 
@@ -159,6 +160,7 @@ impl TimeoutTask {
     }
 }
 
+/*
 struct SocketTask {
     s: wasi_sock::RawSocket,
     event: NetPollEvent,
@@ -247,11 +249,12 @@ impl SocketTimeoutTask {
         (socket_task, timeout_task)
     }
 }
+*/
 
 enum PollTask {
     Timeout(TimeoutTask),
-    Socket(SocketTask),
-    SocketTimeout(SocketTimeoutTask),
+    //Socket(SocketTask),
+    //SocketTimeout(SocketTimeoutTask),
 }
 
 #[derive(Default)]
@@ -285,6 +288,7 @@ impl IoSelector {
                     PollTask::Timeout(task) => {
                         subscription_vec.push(task.as_subscription(i));
                     }
+                    /*
                     PollTask::Socket(task) => {
                         subscription_vec.push(task.as_subscription(i));
                     }
@@ -293,6 +297,7 @@ impl IoSelector {
                         subscription_vec.push(task1);
                         subscription_vec.push(task2);
                     }
+                    */
                 }
             }
         }
@@ -329,6 +334,7 @@ impl IoSelector {
                     (PollTask::Timeout(TimeoutTask { callback, .. }), poll::EVENTTYPE_CLOCK) => {
                         callback(ctx, PollResult::Timeout);
                     }
+                    /*
                     (
                         PollTask::SocketTimeout(SocketTimeoutTask { callback, .. }),
                         poll::EVENTTYPE_CLOCK,
@@ -385,6 +391,7 @@ impl IoSelector {
                             }
                         };
                     }
+                    */
                     (_, _) => {}
                 }
             }
@@ -454,6 +461,7 @@ impl EventLoop {
         self.next_tick_queue.push_back(callback);
     }
 
+    /*
     pub fn tcp_listen(&mut self, port: u16) -> io::Result<AsyncTcpServer> {
         let addr = format!("0.0.0.0:{}", port)
             .parse()
@@ -511,4 +519,5 @@ impl EventLoop {
         std::mem::forget(s);
         Ok(())
     }
+    */
 }
