@@ -331,8 +331,8 @@ impl Context {
 
         #[cfg(feature = "tensorflow")]
         {
-            super::internal_module::tensorflow_module::init_module_tensorflow(&mut ctx);
-            super::internal_module::tensorflow_module::init_module_tensorflow_lite(&mut ctx);
+            //super::internal_module::tensorflow_module::init_module_tensorflow(&mut ctx);
+            //super::internal_module::tensorflow_module::init_module_tensorflow_lite(&mut ctx);
         }
 
         js_init_dirname(&mut ctx);
@@ -340,8 +340,8 @@ impl Context {
         super::internal_module::core::init_global_function(&mut ctx);
         super::internal_module::core::init_ext_function(&mut ctx);
         super::internal_module::encoding::init_encoding_module(&mut ctx);
-        super::internal_module::wasi_net_module::init_module(&mut ctx);
-        super::internal_module::httpx::init_module(&mut ctx);
+        //super::internal_module::wasi_net_module::init_module(&mut ctx);
+        //super::internal_module::httpx::init_module(&mut ctx);
         super::internal_module::os::init_module(&mut ctx);
 
         ctx

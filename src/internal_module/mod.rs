@@ -1,6 +1,5 @@
 pub mod core;
 pub mod encoding;
-pub mod httpx;
 #[cfg(feature = "img")]
 pub mod img_module;
 #[cfg(feature = "tensorflow")]
