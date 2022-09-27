@@ -1,5 +1,4 @@
 mod poll;
-//mod wasi_sock;
 
 use crate::event_loop::poll::{Eventtype, Subscription};
 use crate::{quickjs_sys as qjs, Context, JsValue};
