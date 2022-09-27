@@ -326,14 +326,14 @@ impl Context {
         js_init_module_os(ctx, "qjs:os\0".as_ptr() as *const i8);
         let mut ctx = Context { ctx };
 
-        #[cfg(feature = "img")]
-        super::internal_module::img_module::init_module(&mut ctx);
+        //#[cfg(feature = "img")]
+        //super::internal_module::img_module::init_module(&mut ctx);
 
-        #[cfg(feature = "tensorflow")]
-        {
+        //#[cfg(feature = "tensorflow")]
+        //{
             //super::internal_module::tensorflow_module::init_module_tensorflow(&mut ctx);
             //super::internal_module::tensorflow_module::init_module_tensorflow_lite(&mut ctx);
-        }
+        //}
 
         js_init_dirname(&mut ctx);
 
