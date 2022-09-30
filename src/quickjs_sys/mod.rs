@@ -317,10 +317,10 @@ impl Context {
 
     unsafe fn new_with_rt(rt: *mut JSRuntime) -> Context {
         let ctx = JS_NewContext(rt);
-        JS_AddIntrinsicBigFloat(ctx);
-        JS_AddIntrinsicBigDecimal(ctx);
-        JS_AddIntrinsicOperators(ctx);
-        JS_EnableBignumExt(ctx, 1);
+        //JS_AddIntrinsicBigFloat(ctx);
+        //JS_AddIntrinsicBigDecimal(ctx);
+        //JS_AddIntrinsicOperators(ctx);
+        //JS_EnableBignumExt(ctx, 1);
         js_std_add_console(ctx);
         js_init_module_std(ctx, "std\0".as_ptr() as *const i8);
         js_init_module_os(ctx, "qjs:os\0".as_ptr() as *const i8);
