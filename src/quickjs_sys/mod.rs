@@ -316,7 +316,9 @@ impl Context {
     }
 
     unsafe fn new_with_rt(rt: *mut JSRuntime) -> Context {
+        println!("rt: {:?}", rt);
         let ctx = JS_NewContext(rt);
+        println!("ctx: {:?}", ctx);
         //JS_AddIntrinsicBigFloat(ctx);
         //JS_AddIntrinsicBigDecimal(ctx);
         //JS_AddIntrinsicOperators(ctx);
