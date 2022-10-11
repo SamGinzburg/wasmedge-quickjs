@@ -142,6 +142,7 @@ unsafe extern "C" fn module_loader(
     m.cast()
 }
 
+#[derive(Clone, Copy)]
 pub struct Runtime(pub *mut JSRuntime);
 
 impl Runtime {
@@ -178,12 +179,14 @@ impl Runtime {
     }
 }
 
+/*
 impl Drop for Runtime {
     fn drop(&mut self) {
         self.drop_event_loop();
         unsafe { JS_FreeRuntime(self.0) };
     }
 }
+*/
 
 struct JsFunctionTrampoline;
 impl JsFunctionTrampoline {
@@ -235,6 +238,7 @@ impl JsFunction2Trampoline {
     }
 }
 
+#[derive(Clone, Copy)]
 pub struct Context {
     ctx: *mut JSContext,
 }
@@ -589,6 +593,7 @@ impl Context {
     }
 }
 
+/*
 impl Drop for Context {
     fn drop(&mut self) {
         unsafe {
@@ -596,6 +601,7 @@ impl Drop for Context {
         }
     }
 }
+*/
 
 unsafe fn to_u32(ctx: *mut JSContext, v: JSValue) -> Result<u32, String> {
     if JS_VALUE_GET_NORM_TAG_real(v) == JS_TAG_INT {
@@ -698,7 +704,7 @@ pub trait AsObject {
         }
     }
 
-    fn invoke(&mut self, fn_name: &str, argv: &[JsValue]) -> JsValue {
+    fn invoke(&self, fn_name: &str, argv: &[JsValue]) -> JsValue {
         unsafe {
             let js_ref = self.js_ref();
             let ctx = js_ref.ctx;
@@ -1119,7 +1125,7 @@ impl JsValue {
             false
         }
     }
-    pub fn invoke(&mut self, fn_name: &str, argv: &[JsValue]) -> Option<JsValue> {
+    pub fn invoke(&self, fn_name: &str, argv: &[JsValue]) -> Option<JsValue> {
         if let JsValue::Object(obj) = self {
             Some(obj.invoke(fn_name, argv))
         } else {
