@@ -315,7 +315,7 @@ impl Context {
         std::mem::ManuallyDrop::new(Context { ctx: self.ctx })
     }
 
-    unsafe fn new_with_rt(rt: *mut JSRuntime) -> Context {
+    pub unsafe fn new_with_rt(rt: *mut JSRuntime) -> Context {
         let ctx = JS_NewContext(rt);
         //JS_AddIntrinsicBigFloat(ctx);
         //JS_AddIntrinsicBigDecimal(ctx);
