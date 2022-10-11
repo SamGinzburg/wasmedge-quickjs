@@ -142,7 +142,7 @@ unsafe extern "C" fn module_loader(
     m.cast()
 }
 
-pub struct Runtime(*mut JSRuntime);
+pub struct Runtime(pub *mut JSRuntime);
 
 impl Runtime {
     pub fn new() -> Self {
